@@ -1,6 +1,6 @@
+"use strict";
 const blogsRouter = require("express").Router();
 const Blog = require("../models/blog");
-const log = require("../utils/logger");
 
 // here the path '/' means the path will start from '/api/blogs/
 
