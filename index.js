@@ -1,10 +1,10 @@
+const { info, error } = require("./utils/logger");
+const { PORT, MONGODB_URI } = require("./utils/config");
 const http = require("http");
 const express = require("express");
 const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
-
-const { info, error } = require("./utils/logger");
 
 const blogSchema = new mongoose.Schema({
   title: String,
@@ -15,10 +15,7 @@ const blogSchema = new mongoose.Schema({
 
 const Blog = mongoose.model("Blog", blogSchema);
 
-const pass = "Pfso48149";
-const dataBase = "blog-list";
-const mongoUrl = `mongodb+srv://edgarfbFSO:${pass}@cluster0.eoy65.mongodb.net/${dataBase}?retryWrites=true&w=majority`;
-mongoose.connect(mongoUrl);
+mongoose.connect(MONGODB_URI);
 
 app.use(cors());
 app.use(express.json());
@@ -41,7 +38,6 @@ app.post("/api/blogs", (request, response) => {
   });
 });
 
-const PORT = 3003;
 app.listen(PORT, () => {
   info(`Server running on port ${PORT}`);
 });
