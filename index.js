@@ -4,6 +4,8 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+const { info, error } = require("./utils/logger");
+
 const blogSchema = new mongoose.Schema({
   title: String,
   author: String,
@@ -32,7 +34,6 @@ app.get("/api/blogs", (request, response) => {
 });
 
 app.post("/api/blogs", (request, response) => {
-  console.log(request.body);
   const blog = new Blog(request.body);
 
   blog.save().then((result) => {
@@ -42,5 +43,5 @@ app.post("/api/blogs", (request, response) => {
 
 const PORT = 3003;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  info(`Server running on port ${PORT}`);
 });
