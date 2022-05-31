@@ -1,5 +1,4 @@
-// map just the author's name
-
+const toObject = require("./toObject");
 const mostBlogs = (blogs) => {
   const authors = blogs.map((blog) => blog.author);
 
@@ -16,16 +15,8 @@ const mostBlogs = (blogs) => {
 
   // return an object like {'name': 1 (amount of post) }
   const flatAuthors = authors.reduce(reducer, initialValue);
+  const formatedAuthors = toObject("author", "blogs", flatAuthors);
 
-  const formatedAuthors = [];
-
-  // populate the formatedAuthor array
-  for (const key in flatAuthors) {
-    formatedAuthors.push({
-      author: key,
-      blogs: flatAuthors[key],
-    });
-  }
   //  sort and return just the first item
   return formatedAuthors.sort((a, b) => b.blogs - a.blogs)[0];
 };
